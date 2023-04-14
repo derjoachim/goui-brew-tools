@@ -1,6 +1,6 @@
 # goui-brew-tools
-Hello World Application for [https://github.com/Intermesh/goui](GOUI) by [https://github.com/derjoachim](Joachim).
-This is a reimplementation of certain homebrew tools.
+Hello World Application for [GOUI](https://github.com/Intermesh/goui) by [me](https://github.com/derjoachim).
+This is a reimplementation of certain homebrew tools in Typescript, because it's a Friday afternoon.
 
 Clone this repository and run from this directory:
 
