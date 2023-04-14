@@ -1,5 +1,5 @@
 
-import {cards, menu, comp, h2, root, router, btn, Component, splitter} from "@intermesh/goui";
+import {cards, menu, comp, h2, hr, root, router, btn, Component, splitter} from "@intermesh/goui";
 import {Home} from "./Home.js";
 import {Sg} from "./Sg.js";
 import {Abv} from "./Abv.js";
@@ -10,21 +10,25 @@ const main = cards({"cls": "main scroll", flex: 1});
 const mainMenu = menu(
 	{cls: "main"},
 	comp({cls: "hbox"},
-		h2({text:"Brew", style: { padding: "0", margin: "0", alignSelf: "center"}})),
+		h2({text:"Brew tools", style: { padding: "0", margin: "0", alignSelf: "center"}})),
 
 	btn({
 		text: "Home",
+		icon: "home",
 		route: ""
 	}),
+	comp(hr({style: { padding: "0", margin: "0", alignSelf: "center"}})),
 
 	btn({
 		text: "Calculate SG",
-		route:"sg"
+		route:"sg",
+		icon: "science"
 	}),
 
 	btn({
 		text: "Calculate ABV",
-		route:"abv"
+		route:"abv",
+		icon: "functions"
 	})
 );
 
@@ -74,4 +78,3 @@ router
 			resizeComponentPredicate: mainMenu
 		}), main);
 	});
-
