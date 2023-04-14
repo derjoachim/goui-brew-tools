@@ -7,7 +7,9 @@ import {
     numberfield,
     p,
     Form,
-    tbar, comp
+    tbar,
+    comp,
+    radio
 } from "@intermesh/goui";
 
 export class Sg extends Page {
@@ -26,10 +28,17 @@ export class Sg extends Page {
                     cls: "scroll fit",
                     handler: (form) => {
                         const values = form.getValues(),
-                            tf = this.ctof(values.measuredTemperature),
-                            cf = this.ctof(values.calibratedTemperature),
-                            ar = values.measuredGravity
+                            ar = values.measuredGravity;
 
+                        let tf = values.measuredTemperature,
+                            cf = values.calibratedTemperature;
+
+                        if(values.tempUnit === "C") {
+                            tf = this.ctof(tf);
+                            cf = this.ctof(cf);
+                        }
+
+                        // Black magic buggery numbers
                         const a = 1.00130346,
                             b = 0.000134722124,
                             c = 0.00000204052596,
@@ -38,8 +47,7 @@ export class Sg extends Page {
                         let o = ar * (( a - (b * tf) + (c * Math.pow(tf, 2)) - (d * Math.pow(tf, 3))) /
                             ( a - (b * cf) + (c * Math.pow(cf, 2)) - (d * Math.pow(cf, 3))));
                         o =  Math.round((o * 10000) / 10000);
-                        console.log(o);
-                        // console.log("TODO: do the actual calculation, display in a certain way")
+
                         this.calcCmp.html = "Calculated value: " + o;
                         this.calcCmp.show();
 
@@ -86,6 +94,20 @@ export class Sg extends Page {
                         hint: "Default calibration temperature of your hydrometer in Celsius",
                         decimals: 0
                     })
+                ),
+                fieldset({
+                    legend: "Units"
+                },
+                    radio({
+                        label: "Temperature",
+                        type: "button",
+                        name: "tempUnit",
+                        value: "C",
+                        options: [
+                            {text: "Celsius", value: "C"},
+                            {text: "Fahrenheit", value: "F"}
+                        ]}
+                    ),
                 ),
 
                 this.calcCmp = comp({
