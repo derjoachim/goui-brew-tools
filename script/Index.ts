@@ -2,6 +2,7 @@
 import {cards, menu, comp, h2, root, router, btn, Component, splitter} from "@intermesh/goui";
 import {Home} from "./Home.js";
 import {Sg} from "./Sg.js";
+import {Abv} from "./Abv.js";
 import {NotFound} from "./NotFound.js";
 
 const main = cards({"cls": "main scroll", flex: 1});
@@ -57,9 +58,9 @@ router
 	.add(/^sg$/, () => {
 		pageLoader(Sg);
 	})
-	// .add(/^form$/, () => {
-	// 	pageLoader(Form);
-	// })
+	.add(/^abv$/, () => {
+		pageLoader(Abv);
+	})
 	.add(() => {
 		pageLoader(NotFound);
 	})
